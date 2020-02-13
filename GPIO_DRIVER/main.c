@@ -32,8 +32,8 @@ int main(void)
 
        GPIOvoidPinMode(GPIO_PORTF, GPIO_PIN1, GPIO_DIR_OUT, GPIO_8mA, GPIO_PUSH_PULL);
        GPIOvoidPinMode(GPIO_PORTF, GPIO_PIN4, GPIO_DIR_IN, GPIO_8mA, GPIO_PUSH_PULL);
-       GPIOvoidSetPin(GPIO_PORTF, GPIO_PIN1, GPIO_HIGH);
-/*while (1){
+      // GPIOvoidSetPin(GPIO_PORTF, GPIO_PIN1, GPIO_HIGH);
+while (1){
        if(GPIOvoidGetPin(GPIO_PORTF, GPIO_PIN4) == GPIO_HIGH){
            GPIOvoidSetPin(GPIO_PORTF, GPIO_PIN1, GPIO_HIGH);
        }
@@ -42,6 +42,6 @@ int main(void)
        }
 
 
-}*/
+}
 	return 0;
 }

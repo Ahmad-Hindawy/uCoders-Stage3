@@ -12,37 +12,37 @@ void GPIOvoidPinMode(uint32_t Port, uint8_t Pin, uint8_t Direction, uint8_t Stre
         if(Direction == GPIO_DIR_OUT)
         {GPIODIR(GPIO_PORTA_AHB_BASE) |= (1<<Pin);}
         else
-            {GPIODIR(GPIO_PORTA_AHB_BASE) &= !(1<<Pin);}
+            {GPIODIR(GPIO_PORTA_AHB_BASE) &= ~(1<<Pin);}
         break;
     case GPIO_PORTB:
         if(Direction == GPIO_DIR_OUT)
         {GPIODIR(GPIO_PORTB_AHB_BASE) |= (1<<Pin);}
         else
-        {GPIODIR(GPIO_PORTB_AHB_BASE) &= !(1<<Pin);}
+        {GPIODIR(GPIO_PORTB_AHB_BASE) &= ~(1<<Pin);}
             break;
     case GPIO_PORTC:
         if(Direction == GPIO_DIR_OUT)
         {GPIODIR(GPIO_PORTC_AHB_BASE) |= (1<<Pin);}
         else
-        {GPIODIR(GPIO_PORTC_AHB_BASE) &= !(1<<Pin);}
+        {GPIODIR(GPIO_PORTC_AHB_BASE) &= ~(1<<Pin);}
             break;
     case GPIO_PORTD:
         if(Direction == GPIO_DIR_OUT)
         {GPIODIR(GPIO_PORTD_AHB_BASE) |= (1<<Pin);}
         else
-        {GPIODIR(GPIO_PORTD_AHB_BASE) &= !(1<<Pin);}
+        {GPIODIR(GPIO_PORTD_AHB_BASE) &= ~(1<<Pin);}
             break;
     case GPIO_PORTE:
         if(Direction == GPIO_DIR_OUT)
         {GPIODIR(GPIO_PORTE_AHB_BASE) |= (1<<Pin);}
         else
-        {GPIODIR(GPIO_PORTE_AHB_BASE) &= !(1<<Pin);}
+        {GPIODIR(GPIO_PORTE_AHB_BASE) &= ~(1<<Pin);}
             break;
     case GPIO_PORTF:
         if(Direction == GPIO_DIR_OUT)
         {GPIODIR(GPIO_PORTF_AHB_BASE) |= (1<<Pin);}
         else
-        {GPIODIR(GPIO_PORTF_AHB_BASE) &= !(1<<Pin);}
+        {GPIODIR(GPIO_PORTF_AHB_BASE) &= ~(1<<Pin);}
             break;
     }
 
