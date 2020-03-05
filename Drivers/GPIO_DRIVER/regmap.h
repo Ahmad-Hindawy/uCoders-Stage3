@@ -24,4 +24,15 @@
 #define     GPIOSLR         0x518
 #define     GPIODEN         0x51C
 
+#define     GPIOIS          0x404
+#define     GPIOIBE         0x408
+#define     GPIOIEV         0x40C
+#define     GPIOIM          0x410
+#define     GPIORIS         0x414
+#define     GPIOMIS         0x418
+#define     GPIOICR         0x41C
+
+
+
+
 #endif /* REGMAP_H_ */

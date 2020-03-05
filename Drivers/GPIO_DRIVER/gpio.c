@@ -132,4 +132,93 @@ void GPIOWrite(gpio_port_t port, unsigned char pins, unsigned char data){
     *reg = reg_data;
 }
 
+void GPIOInterruptEventSet(gpio_port_t port, unsigned char pins, gpio_int_t type,gpio_event_t event){
+    gpio_bus_t bus = GPIOBusGet(port);
+    unsigned long int address = base_add[port + bus];
+    volatile unsigned long int * reg ;
+    unsigned long int data ;
 
+    /*clearing int sense*/
+    reg = address + GPIOIS;
+    data = *reg;
+    data &= ~(pins);
+    *reg = data;
+
+    /*adjusting interrupt sense*/
+    reg = address + GPIOIS;
+    data = *reg;
+    data &= ~(pins);
+    data |= (type & pins);
+    *reg = data;
+
+    /*clearing both edges*/
+    reg = address + GPIOIBE;
+    data = *reg;
+    data &= ~(pins);
+    *reg = data;
+
+    /*clearing interrupt event*/
+    reg = address + GPIOIEV;
+    data = *reg;
+    data &= ~(pins);
+    *reg = data;
+
+    /*writing both edges which cancels the next reg*/
+    if(event == INT_BOTH){
+        reg = address + GPIOIBE;
+        data = *reg;
+        data &= ~(pins);
+        data |= (pins);
+        *reg = data;
+    }
+    /*writing to the event reg*/
+    reg = address + GPIOIEV;
+    data = *reg;
+    data &= ~(pins);
+    data |= (event & pins);
+    *reg = data;
+}
+
+void GPIOInterruptMaskSet(gpio_port_t port, unsigned char pins, gpio_mask_t mask){
+    gpio_bus_t bus = GPIOBusGet(port);
+    unsigned long int address = base_add[port + bus];
+    volatile unsigned long int * reg ;
+    unsigned long int data ;
+
+    reg = address + GPIOIM;
+    data = *reg;
+    data &= ~(pins);
+    data |= (mask & pins);
+    *reg = data;
+
+}
+
+void GPIOInterruptClear(gpio_port_t port, unsigned char pins){
+    gpio_bus_t bus = GPIOBusGet(port);
+    unsigned long int address = base_add[port + bus];
+    volatile unsigned long int * reg ;
+    unsigned long int data ;
+
+    reg = address + GPIOICR;
+    data = *reg;
+    data &= ~(pins);
+    data |= (pins);
+    *reg = data;
+
+}
+
+unsigned char GPIOInterruptRawGet(gpio_port_t port, unsigned char pins){
+    gpio_bus_t bus = GPIOBusGet(port);
+    unsigned long int address = base_add[port + bus];
+    volatile unsigned long int * reg  = address + GPIORIS ;
+    unsigned long int data = *reg ;
+    return (data & 0xff);
+}
+
+unsigned char GPIOInterruptMaskGet(gpio_port_t port, unsigned char pins){
+    gpio_bus_t bus = GPIOBusGet(port);
+    unsigned long int address = base_add[port + bus];
+    volatile unsigned long int * reg  = address + GPIOMIS ;
+    unsigned long int data = *reg ;
+    return (data & 0xff);
+}
